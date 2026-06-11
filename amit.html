@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תיק העבודה של עמית</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .nav-logo h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #3498db;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .highlight {
+            color: #ffd700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-small {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat h4 {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .stat p {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: #f8f9fa;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .portfolio-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(52, 152, 219, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-info {
+            text-align: center;
+            color: white;
+        }
+
+        .portfolio-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .portfolio-info p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tech-stack span {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .skill-category h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #f8f9fa;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: #3498db;
+        }
+
+        .contact-item h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .contact-item p {
+            color: #666;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Rubik', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .loading {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: all 0.3s ease;
+        }
+
+        /* Notification styles */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 10000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: #27ae60;
+        }
+
+        .notification.error {
+            background: #e74c3c;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (min-width: 769px) {
+            .nav-menu.active {
+                display: flex;
+                flex-direction: row;
+                position: static;
+                background: transparent;
+                padding: 0;
+                box-shadow: none;
+            }
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>עמית</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">בית</a>
+                <a href="#about" class="nav-link">אודות</a>
+                <a href="#portfolio" class="nav-link">תיק עבודות</a>
+                <a href="#skills" class="nav-link">כישורים</a>
+                <a href="#contact" class="nav-link">צור קשר</a>
+                <a href="admin.html" class="nav-link"><i class="fas fa-cog"></i> ניהול</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    שלום, אני <span class="highlight">עמית</span>
+                </h1>
+                <p class="hero-subtitle">
+                    מפתח ומעצב חווית משתמש
+                </p>
+                <p class="hero-description">
+                    אני יוצר חוויות דיגיטליות יוצאות דופן ומעוצבות בקפידה
+                </p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn btn-primary">צפה בתיק העבודות</a>
+                    <a href="#contact" class="btn btn-secondary">צור קשר</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-image">
+                    <img src="images/profile.jpg" alt="עמית" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjEwMCIgcj0iNDAiIGZpbGw9IiM5Q0E0QUYiLz4KPHA+PC9wPgo8L3N2Zz4='">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>אודות</h2>
+                <p>קצת עליי ועל הדרך שלי</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>הסיפור שלי</h3>
+                    <p>
+                        אני מפתח חזיתי עם תשוקה לעיצוב וטכנולוגיה. בעל ניסיון של שנים בפיתוח אתרים ואפליקציות,
+                        עם התמחות ביצירת חוויות משתמש יוצאות דופן.
+                    </p>
+                    <p>
+                        אני מאמין שכל פרויקט הוא הזדמנות ליצור משהו מיוחד. אני משלב בין ידע טכני עמוק
+                        לבין הבנה עמוקה לצרכי המשתמשים.
+                    </p>
+                    <div class="stats">
+                        <div class="stat">
+                            <h4>50+</h4>
+                            <p>פרויקטים הושלמו</p>
+                        </div>
+                        <div class="stat">
+                            <h4>3+</h4>
+                            <p>שנות ניסיון</p>
+                        </div>
+                        <div class="stat">
+                            <h4>100%</h4>
+                            <p>שביעות רצון לקוחות</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="images/about.jpg" alt="עבודה" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgMjAwSDEwMFYxNTBIMTUwVjIwMEgxMDBaIiBmaWxsPSIjOUNBNEFGIi8+Cjwvc3ZnPg=='">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>תיק עבודות</h2>
+                <p>פרויקטים שיצרתי בגאווה</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/project1.jpg" alt="פרויקט 1" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWNhNGFmIiBmb250LXNpemU9IjE0Ij5Qcm9qZWN0IDE8L3RleHQ+Cjwvc3ZnPg=='">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <h3>אתר מסחר אלקטרוני</h3>
+                                <p>פיתוח אתר חנות מקוון עם מערכת ניהול מלאה</p>
+                                <div class="tech-stack">
+                                    <span>React</span>
+                                    <span>Node.js</span>
+                                    <span>MongoDB</span>
+                                </div>
+                                <a href="#" class="btn btn-small">צפה בפרויקט</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/project2.jpg" alt="פרויקט 2" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHg9IjE1MCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWNhNGFmIiBmb250LXNpemU9IjE0Ij5Qcm9qZWN0IDI8L3RleHQ+Cjwvc3ZnPg=='">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <h3>אפליקציית מובייל</h3>
+                                <p>אפליקציה לניהול משימות עם ממשק אינטואיטיבי</p>
+                                <div class="tech-stack">
+                                    <span>React Native</span>
+                                    <span>Firebase</span>
+                                    <span>Redux</span>
+                                </div>
+                                <a href="#" class="btn btn-small">צפה בפרויקט</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/project3.jpg" alt="פרויקט 3" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHg9IjE1MCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWNhNGFmIiBmb250LXNpemU9IjE0Ij5Qcm9qZWN0IDM8L3RleHQ+Cjwvc3ZnPg=='">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <h3>אתר תדמית</h3>
+                                <p>עיצוב ואפיון אתר תדמית לחברה טכנולוגית</p>
+                                <div class="tech-stack">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <a href="#" class="btn btn-small">צפה בפרויקט</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2>כישורים</h2>
+                <p>הטכנולוגיות והכלים שאני עובד איתם</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>פיתוח חזיתי</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-name">React</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">JavaScript</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">HTML/CSS</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">TypeScript</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>פיתוח צד שרת</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-name">Node.js</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Python</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">MongoDB</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">SQL</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>כלים ועיצוב</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-name">Figma</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Git</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Adobe XD</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Photoshop</div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>צור קשר</h2>
+                <p>נשמח לשמוע ממך</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>אימייל</h4>
+                            <p>amit@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>טלפון</h4>
+                            <p>050-123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>מיקום</h4>
+                            <p>ישראל</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="השם שלך" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="האימייל שלך" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="נושא ההודעה" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="ההודעה שלך" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">שלח הודעה</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 עמית. כל הזכויות שמורות.</p>
+            <p class="footer-url">אתר זה זמין בכתובת: <strong>http://localhost:8000/</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const navbar = document.querySelector('.navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const contactForm = document.querySelector('.contact-form');
+        const sections = document.querySelectorAll('section');
+
+        // Navigation Toggle for Mobile
+        function toggleMenu() {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+
+        // Close mobile menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Active navigation link based on scroll position
+        function updateActiveNavLink() {
+            const scrollPosition = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Navbar background change on scroll
+        function updateNavbar() {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        }
+
+        // Scroll event listeners
+        window.addEventListener('scroll', () => {
+            updateActiveNavLink();
+            updateNavbar();
+        });
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.stat, .portfolio-item, .skill-item, .contact-item');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom > 0);
+
+                if (isVisible) {
+                    element.classList.add('fade-in-up');
+                }
+            });
+        }
+
+        // Contact form handling
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+
+            // Basic validation
+            if (!name || !email || !subject || !message) {
+                showNotification('אנא מלא את כל השדות', 'error');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNotification('כתובת אימייל לא תקינה', 'error');
+                return;
+            }
+
+            // Simulate form submission (you can replace this with actual API call)
+            showNotification('ההודעה נשלחה בהצלחה! נחזור אליך בקרוב.', 'success');
+
+            // Reset form
+            contactForm.reset();
+        }
+
+        // Notification system
+        function showNotification(message, type = 'success') {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+
+            // Add to DOM
+            document.body.appendChild(notification);
+
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+
+            // Hide notification after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 5000);
+        }
+
+        // Skills animation
+        function animateSkills() {
+            const skillBars = document.querySelectorAll('.skill-fill');
+
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const skillBar = entry.target;
+                        const width = skillBar.style.width;
+                        skillBar.style.width = '0%';
+                        setTimeout(() => {
+                            skillBar.style.width = width;
+                        }, 200);
+                    }
+                });
+            }, observerOptions);
+
+            skillBars.forEach(bar => {
+                observer.observe(bar);
+            });
+        }
+
+        // Portfolio hover effect enhancement
+        function enhancePortfolioHover() {
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            portfolioItems.forEach(item => {
+                const overlay = item.querySelector('.portfolio-overlay');
+
+                item.addEventListener('mouseenter', () => {
+                    overlay.style.opacity = '1';
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    overlay.style.opacity = '0';
+                });
+            });
+        }
+
+        // Typing effect for hero subtitle
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.textContent = '';
+
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+
+            type();
+        }
+
+        // Load content from admin panel
+        function loadAdminContent() {
+            // Load images
+            const savedImages = localStorage.getItem('portfolio_images');
+            if (savedImages) {
+                const images = JSON.parse(savedImages);
+                Object.entries(images).forEach(([type, imageData]) => {
+                    const imgElement = document.querySelector(`img[src="images/${type}.jpg"]`);
+                    if (imgElement) {
+                        imgElement.src = imageData.data;
+                        imgElement.removeAttribute('onerror');
+                    }
+                });
+            }
+
+            // Load content
+            const savedContent = localStorage.getItem('portfolio_content');
+            if (savedContent) {
+                const content = JSON.parse(savedContent);
+
+                // Update hero section
+                if (content.name) {
+                    const heroTitle = document.querySelector('.hero-title');
+                    if (heroTitle) {
+                        heroTitle.innerHTML = `שלום, אני <span class="highlight">${content.name}</span>`;
+                    }
+                }
+
+                if (content.subtitle) {
+                    const heroSubtitle = document.querySelector('.hero-subtitle');
+                    if (heroSubtitle) {
+                        heroSubtitle.textContent = content.subtitle;
+                    }
+                }
+
+                if (content.description) {
+                    const heroDesc = document.querySelector('.hero-description');
+                    if (heroDesc) {
+                        heroDesc.textContent = content.description;
+                    }
+                }
+
+                // Update about section
+                if (content.description) {
+                    const aboutDesc = document.querySelector('.about-text p:first-of-type');
+                    if (aboutDesc) {
+                        aboutDesc.textContent = content.description;
+                    }
+                }
+
+                // Update contact info
+                if (content.email) {
+                    const emailElement = document.querySelector('.contact-item p');
+                    if (emailElement && emailElement.previousElementSibling.textContent.includes('אימייל')) {
+                        emailElement.textContent = content.email;
+                    }
+                }
+
+                if (content.phone) {
+                    const phoneElement = document.querySelector('.contact-item p');
+                    if (phoneElement && phoneElement.previousElementSibling.textContent.includes('טלפון')) {
+                        phoneElement.textContent = content.phone;
+                    }
+                }
+
+                if (content.location) {
+                    const locationElement = document.querySelector('.contact-item p');
+                    if (locationElement && locationElement.previousElementSibling.textContent.includes('מיקום')) {
+                        locationElement.textContent = content.location;
+                    }
+                }
+
+                // Update statistics
+                const stats = document.querySelectorAll('.stat h4');
+                if (stats.length >= 3) {
+                    if (content.projects) stats[0].textContent = content.projects;
+                    if (content.experience) stats[1].textContent = content.experience;
+                    if (content.satisfaction) stats[2].textContent = content.satisfaction;
+                }
+            }
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize active nav link
+            updateActiveNavLink();
+            updateNavbar();
+
+            // Add scroll animation listener
+            window.addEventListener('scroll', animateOnScroll);
+
+            // Initialize skills animation
+            animateSkills();
+
+            // Enhance portfolio hover effects
+            enhancePortfolioHover();
+
+            // Add form submit handler
+            if (contactForm) {
+                contactForm.addEventListener('submit', handleFormSubmit);
+            }
+
+            // Load admin content
+            loadAdminContent();
+
+            // Typing effect for hero subtitle (optional)
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            if (heroSubtitle) {
+                const originalText = heroSubtitle.textContent;
+                typeWriter(heroSubtitle, originalText, 50);
+            }
+
+            // Add loading animation to sections
+            sections.forEach((section, index) => {
+                section.classList.add('loading');
+                setTimeout(() => {
+                    section.classList.remove('loading');
+                }, index * 200);
+            });
+        });
+
+        // Prevent form submission on enter in textarea
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName === 'TEXTAREA') {
+                // Allow default behavior (new line) in textarea
+                return;
+            }
+        });
+
+        // Add keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            // Escape key closes mobile menu
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    </script>
+</body>
+</html>

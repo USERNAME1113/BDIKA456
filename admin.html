@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פאנל ניהול - תיק העבודה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Admin Login/Register -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>פאנל ניהול</h2>
+                <p>הזינו קוד אדמין להמשך</p>
+            </div>
+            <form id="auth-form" class="auth-form">
+                <div class="form-group">
+                    <label for="admin-code">קוד אדמין</label>
+                    <input type="password" id="admin-code" name="admin-code" placeholder="הזינו קוד אדמין" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">התחבר</button>
+            </form>
+            <div class="auth-footer">
+                <p>קוד האדמין: <strong>AMIT1X2</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="admin-dashboard" style="display: none;">
+        <!-- Admin Navigation -->
+        <nav class="admin-nav">
+            <div class="admin-nav-container">
+                <h2>פאנל ניהול</h2>
+                <div class="admin-nav-buttons">
+                    <button id="logout-btn" class="btn btn-secondary">התנתק</button>
+                    <a href="index.html" class="btn btn-primary">חזור לאתר</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Admin Content -->
+        <div class="admin-content">
+            <div class="container">
+                <!-- Upload Section -->
+                <section class="admin-section">
+                    <h3>העלאת תמונות</h3>
+                    <div class="upload-grid">
+                        <div class="upload-item">
+                            <h4>תמונת פרופיל</h4>
+                            <div class="upload-area" data-type="profile">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-user-circle"></i>
+                                    <p>גרור תמונה או לחץ לבחירה</p>
+                                </div>
+                                <input type="file" class="file-input" accept="image/*" data-type="profile">
+                            </div>
+                            <div class="upload-preview" data-type="profile"></div>
+                        </div>
+
+                        <div class="upload-item">
+                            <h4>תמונה - אודות</h4>
+                            <div class="upload-area" data-type="about">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <p>גרור תמונה או לחץ לבחירה</p>
+                                </div>
+                                <input type="file" class="file-input" accept="image/*" data-type="about">
+                            </div>
+                            <div class="upload-preview" data-type="about"></div>
+                        </div>
+
+                        <div class="upload-item">
+                            <h4>פרויקט 1</h4>
+                            <div class="upload-area" data-type="project1">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-project-diagram"></i>
+                                    <p>גרור תמונה או לחץ לבחירה</p>
+                                </div>
+                                <input type="file" class="file-input" accept="image/*" data-type="project1">
+                            </div>
+                            <div class="upload-preview" data-type="project1"></div>
+                        </div>
+
+                        <div class="upload-item">
+                            <h4>פרויקט 2</h4>
+                            <div class="upload-area" data-type="project2">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-project-diagram"></i>
+                                    <p>גרור תמונה או לחץ לבחירה</p>
+                                </div>
+                                <input type="file" class="file-input" accept="image/*" data-type="project2">
+                            </div>
+                            <div class="upload-preview" data-type="project2"></div>
+                        </div>
+
+                        <div class="upload-item">
+                            <h4>פרויקט 3</h4>
+                            <div class="upload-area" data-type="project3">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-project-diagram"></i>
+                                    <p>גרור תמונה או לחץ לבחירה</p>
+                                </div>
+                                <input type="file" class="file-input" accept="image/*" data-type="project3">
+                            </div>
+                            <div class="upload-preview" data-type="project3"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Content Management -->
+                <section class="admin-section">
+                    <h3>ניהול תוכן</h3>
+                    <div class="content-management">
+                        <div class="content-item">
+                            <h4>מידע אישי</h4>
+                            <div class="form-group">
+                                <label>שם</label>
+                                <input type="text" id="admin-name" placeholder="השם שלך">
+                            </div>
+                            <div class="form-group">
+                                <label>תיאור קצר</label>
+                                <input type="text" id="admin-subtitle" placeholder="מפתח ומעצב חווית משתמש">
+                            </div>
+                            <div class="form-group">
+                                <label>תיאור מפורט</label>
+                                <textarea id="admin-description" rows="3" placeholder="תיאור מפורט עליך..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="content-item">
+                            <h4>פרטי קשר</h4>
+                            <div class="form-group">
+                                <label>אימייל</label>
+                                <input type="email" id="admin-email" placeholder="amit@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>טלפון</label>
+                                <input type="tel" id="admin-phone" placeholder="050-123-4567">
+                            </div>
+                            <div class="form-group">
+                                <label>מיקום</label>
+                                <input type="text" id="admin-location" placeholder="ישראל">
+                            </div>
+                        </div>
+
+                        <div class="content-item">
+                            <h4>סטטיסטיקות</h4>
+                            <div class="stats-grid">
+                                <div class="form-group">
+                                    <label>פרויקטים שהושלמו</label>
+                                    <input type="text" id="admin-projects" placeholder="50+">
+                                </div>
+                                <div class="form-group">
+                                    <label>שנות ניסיון</label>
+                                    <input type="text" id="admin-experience" placeholder="3+">
+                                </div>
+                                <div class="form-group">
+                                    <label>שביעות רצון לקוחות</label>
+                                    <input type="text" id="admin-satisfaction" placeholder="100%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Actions -->
+                <section class="admin-section">
+                    <h3>פעולות</h3>
+                    <div class="actions-grid">
+                        <button id="save-content-btn" class="btn btn-primary btn-large">
+                            <i class="fas fa-save"></i> שמור שינויים
+                        </button>
+                        <button id="clear-all-btn" class="btn btn-danger btn-large">
+                            <i class="fas fa-trash"></i> נקה הכל
+                        </button>
+                        <button id="export-data-btn" class="btn btn-secondary btn-large">
+                            <i class="fas fa-download"></i> ייצא נתונים
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Uploaded Images List -->
+                <section class="admin-section">
+                    <h3>תמונות שהועלו</h3>
+                    <div id="uploaded-images" class="uploaded-images-grid">
+                        <!-- Images will be displayed here -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
